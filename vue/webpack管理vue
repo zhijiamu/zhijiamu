@@ -13,4 +13,26 @@ css-loader 会遍历 CSS 文件，然后找到 url() 表达式然后处理他们
 style-loader 会把原来的 CSS 代码插入页面中的一个 style 标签中
 cnpm install css-loader style-loader
 
+npm: '10.2.3',、、
+node: '20.10.0',
+modules: '115',
+node-sass 9.+
 
+npm install webpack webpack-cli --save-dev
+
+npx webpack
+npx webpack, which will take our script at src/index.js as the entry point, and will generate dist/main.js as the output.
+npx webpack --config webpack.config.js
+
+
+ "scripts": {
+    "build": "webpack"
+   },
+run build instead of npx
+
+npm install --save-dev style-loader css-loader
+├── css-loader@6.8.1
+├── lodash@4.17.21
+├── style-loader@3.3.3
+├── webpack-cli@5.1.4
+└── webpack@5.89.0
