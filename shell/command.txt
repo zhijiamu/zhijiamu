@@ -1,0 +1,11 @@
+grep -v 反向
+grep -r  关键字 文件夹
+grep -c
+grep -A
+grep -B
+grep -C
+grep -E 正则表达式
+grep -H 显示文件名
+--include 特定文件类型 "*.txt"
+grep -E "|"
+grep -nir
