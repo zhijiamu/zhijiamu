@@ -1,1 +1,94 @@
+1 客户端
+2 server端
+3 驱动（自带）
+
+环境依赖
+nodejs
+https://nodejs.org/en/download
+
+server 
+npm i --location=global appium
+npm install --location=global appium@lastest
+npm install -g appium2
+
+appium driver install --source=npm appium-x
+
+获取包名与界面名
+package
+activity
+
+查询当前设备
+adb devices -l
+查询android 版本号
+adb shell getprop ro.build.version.release
+
+C:\Users\Administrator>adb shell dumpsys activity|findstr "mResume"
+ mResumedActivity: ActivityRecord{72ff2af u0 com.android.settings/.SubSettings t122}
+
+C:\Users\Administrator>adb shell dumpsys activity |findstr "mResume"
+    mResumedActivity: ActivityRecord{ef4296e u0 com.haiercash.gouhua/.MainActivity t148}
+
+C:\Users\Administrator>appium driver list --installed
+
+com.haiercash.gouhua
+
+import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.AndroidElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import java.net.URL;
+DesiredCapabilities capabilities = new DesiredCapabilities();
+capabilities.setCapability("deviceName", "Android Device");
+capabilities.setCapability("platformName", "Android");
+capabilities.setCapability("appPackage", "com.example.app");
+capabilities.setCapability("appActivity", "com.example.app.MainActivity");
+capabilities.setCapability("automationName", "UiAutomator2");
+URL url = new URL("AndroidDriver<AndroidElement> driver = new AndroidDriver<>(url, capabilities);
+
+List of devices attached
+WCVGHYOZNNJB5S9L       device product:PD1901 model:V1901A device:PD1901 transport_id:2
+
+cmp=com.haiercash/.activity.Start_Page_new
+adb shell dumpsys activity recents | findstr intent={
+adb shell am start com.haiercash.gouhua/.activity.SplashActivity
+Starting: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=com.haiercash.gouhua/.activity.SplashActivity }
+
+Activity: com.haiercash/.activity.Start_Page_new
+adb shell am start com.haiercash.gouhua/com.haiercash.gouhua.activity.SplashActivity
+adb shell am start com.haiercash/.activity.Start_Page_new 
+ Encountered internal error running command: Error: 
+Cannot start the 'com.haiercash' application.
+ Visit https://github.com/appium/appium/blob/master/docs/en/writing-running-appium/android/activity-startup.md 
+for troubleshooting. Original error: Error executing adbExec. 
+Original error: 'Command ''
+C:\\Program Files\\android-sdk_r24.4.1-windows\\android-sdk-windows\\platform-tools\\adb.exe' -P 5037 -s WCVGHYOZNNJB5S9L shell am start -W -S -a android.intent.action.MAIN -c android.intent.category.LAUNCHER -f 0x10200000' exited with code 1'; Command output: Error: Intent does not match any activities: Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 }
+
+frameworks/base/services/core/java/com/android/server/am/ActivityManagerShellCommand.java
+>adb logcat -s ActivityManager:I | findstr Displayed
+
+点击、输入、拖拽、滑动、获取界面元素属性，以上这些是Appium提供的能力
+ID定位
+语法：driver.find_element(By.ID,‘resource-id’)
+BY.ID中的ID一定是大写的，逗号后面跟的字符串是我们在元素定位的过程中发现的resource-id。在定位的过程中，resource-id可能会出现多个，代码写到这，系统会默认识别第一个。
+还有一个是accessibility id，这个在前面元素定位的界面中，我们也可以看到。
+语法：driver.find_element(By.ACCESSIBILITY_ID,'accessibility id')
+Xpath在appium中的应用
+在实践的过程中，用得最多的是Xpath，这里给大家列出了几个Xpath表达式：
+1.通过ID选择//*[@resource-id=“”]
+2.通过class选择//android.view.ViewGroup
+3.通过其他属性选择//*[@属性=“属性值”]
+4.选择子元素//*[@属性=“属性值”]/*
+5.选择父元素//*[@属性=“属性值”]/..
+元素操作
+元素操作就是在元素定位的语句后面加一个 .click或者.send_keys()。
+1.点击driver.find_element(By.元素类型,‘定位值').click()
+2.输入driver.find_element(By.元素类型,‘定位值’). send_keys()send_keys()传的参数格式是字符串
+
+
+An unknown server-side error occurred while processing the command. Original error: 'POST /actions' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details
+mvn compile
+mvn archetype:create -DgroupId=packageName -DartifactId=projectName
+nexus搭建私服
+pluginsRepository
+lucins
+
 
